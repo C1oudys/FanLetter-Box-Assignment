@@ -1,3 +1,5 @@
+// ImageHeader.js
+
 import React, { useState } from 'react';
 import './ImageHeader.css';
 
@@ -12,47 +14,70 @@ const ImageHeader = () => {
   const [selectedImage, setSelectedImage] = useState();
 
   const handleImageClick = (imageName) => {
-    setSelectedImage(imageName);
+    setSelectedImage(selectedImage === imageName ? imageName : imageName);
   };
 
   return (
     <div className="image-header-container">
-      <img
-        src={Yujin}
-        alt="Yujin"
-        className={selectedImage === 'Yujin' ? 'selected' : ''}
-        onClick={() => handleImageClick('Yujin')}
-      />
-      <img
-        src={Gaeul}
-        alt="Gaeul"
-        className={selectedImage === 'Gaeul' ? 'selected' : ''}
-        onClick={() => handleImageClick('Gaeul')}
-      />
-      <img
-        src={Rei}
-        alt="Rei"
-        className={selectedImage === 'Rei' ? 'selected' : ''}
-        onClick={() => handleImageClick('Rei')}
-      />
-      <img
-        src={Wonyoung}
-        alt="Wonyoung"
-        className={selectedImage === 'Wonyoung' ? 'selected' : ''}
-        onClick={() => handleImageClick('Wonyoung')}
-      />
-      <img
-        src={Liz}
-        alt="Liz"
-        className={selectedImage === 'Liz' ? 'selected' : ''}
-        onClick={() => handleImageClick('Liz')}
-      />
-      <img
-        src={Leeseo}
-        alt="Leeseo"
-        className={selectedImage === 'Leeseo' ? 'selected' : ''}
-        onClick={() => handleImageClick('Leeseo')}
-      />
+      <div className="image-with-name">
+        <img
+          src={Yujin}
+          alt="Yujin"
+          className={selectedImage === 'Yujin' ? 'selected' : ''}
+          onClick={() => handleImageClick('Yujin')}
+        />
+        <span className="artist-name">Yujin</span>
+      </div>
+
+      <div className="image-with-name">
+        <img
+          src={Gaeul}
+          alt="Gaeul"
+          className={selectedImage === 'Gaeul' ? 'selected' : ''}
+          onClick={() => handleImageClick('Gaeul')}
+        />
+        <span className="artist-name">Gaeul</span>
+      </div>
+
+      <div className="image-with-name">
+        <img
+          src={Rei}
+          alt="Rei"
+          className={selectedImage === 'Rei' ? 'selected' : ''}
+          onClick={() => handleImageClick('Rei')}
+        />
+        <span className="artist-name">Rei</span>
+      </div>
+
+      <div className="image-with-name">
+        <img
+          src={Wonyoung}
+          alt="Wonyoung"
+          className={selectedImage === 'Wonyoung' ? 'selected' : ''}
+          onClick={() => handleImageClick('Wonyoung')}
+        />
+        <span className="artist-name">Wonyoung</span>
+      </div>
+
+      <div className="image-with-name">
+        <img
+          src={Liz}
+          alt="Liz"
+          className={selectedImage === 'Liz' ? 'selected' : ''}
+          onClick={() => handleImageClick('Liz')}
+        />
+        <span className="artist-name">Liz</span>
+      </div>
+
+      <div className="image-with-name">
+        <img
+          src={Leeseo}
+          alt="Leeseo"
+          className={selectedImage === 'Leeseo' ? 'selected' : ''}
+          onClick={() => handleImageClick('Leeseo')}
+        />
+        <span className="artist-name">Leeseo</span>
+      </div>
     </div>
   );
 };
