@@ -1,0 +1,19 @@
+.image-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* 헤더의 전체 너비를 사용 */
+}
+
+.image-header-container img {
+  width: 16.666%; /* 100% / 6 = 16.666...% */
+  height: 75vh; /* 이미지 비율을 유지하면서 가로 크기에 맞춤 */
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  filter: brightness(45%);
+}
+
+.image-header-container img:hover,
+.image-header-container img.selected {
+  filter: brightness(1.2);
+}
