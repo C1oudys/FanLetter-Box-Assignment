@@ -1,12 +1,9 @@
-import React from 'react';
-import ImageHeader from './ImageHeader';
+import React from 'react'
 
-const Header = () => {
+function Header() {
   return (
-    <div>
-      <ImageHeader />
-    </div>
-  );
-};
+    <div>Header</div>
+  )
+}
 
-export default Header;
+export default Header
