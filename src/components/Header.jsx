@@ -1,7 +1,12 @@
-// Header.js
-
 import React, { useState } from "react";
 import styled from "styled-components";
+import YujinImage from "../assets/Yujin.png";
+import GaeulImage from "../assets/Gaeul.png";
+import ReiImage from "../assets/Rei.png";
+import WonyoungImage from "../assets/Wonyoung.png";
+import LizImage from "../assets/Liz.png";
+import LeeseoImage from "../assets/Leeseo.png";
+import AllImage from "../assets/IveLogo.jpeg";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -9,15 +14,36 @@ const HeaderContainer = styled.div`
 `;
 
 const ArtistTab = styled.div`
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
+  filter: brightness(50%);
+  position: relative;
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: brightness(110%);
+  }
 
   ${(props) =>
     props.isActive &&
     `
-    background-color: #f0f0f0;
-    color: #333;
+    filter: brightness(110%);
   `}
+`;
+
+const ArtistInfoContainer = styled.div`
+  position: absolute;
+  bottom: 5%;
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: 2px 2px 8px red;
+  color: white;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
 `;
 
 const Header = ({ setActiveTab, activeTab }) => {
@@ -27,8 +53,18 @@ const Header = ({ setActiveTab, activeTab }) => {
     setActiveTab(tab);
   };
 
+  const artistImages = {
+    all: AllImage,
+    유진: YujinImage,
+    가을: GaeulImage,
+    레이: ReiImage,
+    원영: WonyoungImage,
+    리즈: LizImage,
+    이서: LeeseoImage,
+  };
+
   const artistNames = {
-    all: "전체",
+    all: "전체보기",
     유진: "안유진",
     가을: "가을",
     레이: "레이",
@@ -45,7 +81,14 @@ const Header = ({ setActiveTab, activeTab }) => {
           isActive={activeTab === artist}
           onClick={() => handleTabClick(artist)}
         >
-          {artistNames[artist]}
+          <img
+            src={artistImages[artist]}
+            alt={`${artist} 이미지`}
+            style={{ width: "206px", height: "350px", objectFit: "cover" }}
+          />
+          <ArtistInfoContainer>
+            {artistNames[artist]}
+          </ArtistInfoContainer>
         </ArtistTab>
       ))}
     </HeaderContainer>

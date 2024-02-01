@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Letter from "./Letter";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
+const StyledLink = styled(RouterLink)`
+  text-decoration: none;
+`;
 
 const LetterList = ({ activeTab, fanLetters, onLetterClick }) => {
   if (!fanLetters) {
@@ -13,13 +17,12 @@ const LetterList = ({ activeTab, fanLetters, onLetterClick }) => {
       {fanLetters
         .filter((letter) => activeTab === "all" || letter.writedTo === activeTab)
         .map((letter) => (
-          <Link key={letter.id} to={`/detail/${letter.id}`} onClick={() => onLetterClick(letter.id)}>
+          <StyledLink key={letter.id} to={`/detail/${letter.id}`} onClick={() => onLetterClick(letter.id)}>
             <Letter letter={letter} />
-          </Link>
+          </StyledLink>
         ))}
     </div>
   );
 };
 
 export default LetterList;
-

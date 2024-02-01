@@ -1,26 +1,68 @@
-  // Import necessary libraries
-  import React from "react";
-  import styled from "styled-components";
+import React from "react";
+import styled from "styled-components";
 
-  // Styled-components for Avatar
-  const AvatarImage = styled.img`
-    width: 50px; // Adjust the size as needed
-    height: 50px;
-    border-radius: 50%;
-  `;
+// 스타일된 컴포넌트 추가
+const LetterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #b22222;
+  border-radius: 3%;
+  width: 450px;
+  height: 200px;
+`;
 
-  // Letter 컴포넌트
-  const Letter = ({ letter }) => {
-    return (
-      <div key={letter.id}>
-        {/* Display Avatar */}
-        <AvatarImage src={letter.avatar} alt="Avatar" />
-        <p>{letter.nickname}</p>
-        <p>{letter.createdAt}</p>
-        {/* Display Fan Letter Details */}
-        <p>{letter.content.length > 50 ? `${letter.content.slice(0, 50)}...` : letter.content}</p>
-      </div>
-    );
-  };
+const AvatarImage = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; 
+  margin-bottom: 8px;
+`;
 
-  export default Letter;
+const LetterTextContainer = styled.div`
+  flex: 1; 
+`;
+
+const Nickname = styled.p`
+  font-weight: bold;
+  color: #f5f5f5;
+  margin-bottom: 10px;
+  font-size: 20px;
+`;
+
+const CreatedAt = styled.p`
+  color: #e6e6fa; 
+  margin-bottom: 5px; 
+  font-size: 18px;
+  margin-bottom: 20px;
+`;
+
+const Content = styled.p`
+  margin: 0; 
+  padding: 5px;
+  height: 30px;
+  color: 	#fffaf0;
+  background-color: #ff4500;
+  line-height: 1.4;
+  font-size: 18px;
+`;
+
+const Letter = ({ letter }) => {
+  return (
+    <LetterContainer key={letter.id}>
+      <AvatarImage src={letter.avatar} alt="Avatar" />
+      <LetterTextContainer>
+        <Nickname>{letter.nickname}</Nickname>
+        <CreatedAt>{letter.createdAt}</CreatedAt>
+        <Content>
+          {letter.content.length > 50
+            ? `${letter.content.slice(0, 50)}...`
+            : letter.content}
+        </Content>
+      </LetterTextContainer>
+    </LetterContainer>
+  );
+};
+
+export default Letter;

@@ -14,26 +14,58 @@ const FormContainer = styled.div`
 
 const AddForm = styled.form`
   display: flex;
+  width: 500px;
+  height: 350px;
   flex-direction: column;
   align-items: center;
+  background-color:#dc143c;
+  border-radius: 3%;
 `;
 
 const Input = styled.input`
+  background-color: #f08080;
   margin: 10px;
+  width: 200px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
 `;
 
 const TextArea = styled.textarea`
+  background-color: #f08080;
   margin: 10px;
+  width: 450px;
+  height: 300px;
+  color: white;
+  font-weight: bold;
 `;
 
 const Select = styled.select`
+  background-color: #f08080;
   margin: 10px;
+  padding: 5px;
+  width: 150px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
 `;
 
 const Option = styled.option``;
 
 const SubmitButton = styled.button`
+  background-color: #f08080;
+  border: none;
+  width: 80px;
+  height: 40px;
   margin: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* 호버 효과 부드럽게 만들기 */
+
+  &:hover {
+    background-color:#800000; /* 호버 시 배경색 변경 */
+  } 
 `;
 
 const Form = ({ onFanLetterSubmit, artists }) => {
