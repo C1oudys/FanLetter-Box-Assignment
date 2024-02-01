@@ -56,7 +56,7 @@ const Form = ({ onFanLetterSubmit, artists }) => {
 
     // 새로운 팬 레터 객체 생성
     const newFanLetter = {
-      id: uuidv4(), // Generate UUID v4
+      id: uuidv4(), 
       avatar: defaultAvatar, // 기본 아바타 이미지 사용
       nickname: trimmedNickname,
       content: trimmedContent,
