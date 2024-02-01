@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import fakeData from "../shared/fakeData.json";
 import defaultAvatar from "../assets/defaultavatar.png";
+import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.div`
   display: flex;
@@ -44,8 +45,8 @@ const Form = ({ onFanLetterSubmit, artists }) => {
     event.preventDefault();
 
     // 입력 유효성 검사
-    if (!nickname || !content || !selectedArtist) {
-      alert("닉네임, 내용, 아티스트를 모두 선택하세요.");
+    if (!nickname || !content || selectedArtist === "all") {
+      alert("닉네임, 내용, 멤버를 선택하세요.");
       return;
     }
 
@@ -55,7 +56,7 @@ const Form = ({ onFanLetterSubmit, artists }) => {
 
     // 새로운 팬 레터 객체 생성
     const newFanLetter = {
-      id: fakeData.length + 1, // 고유한 ID 생성 (실제 프로덕션에서는 더 나은 방법으로 대체해야 함)
+      id: uuidv4(), // Generate UUID v4
       avatar: defaultAvatar, // 기본 아바타 이미지 사용
       nickname: trimmedNickname,
       content: trimmedContent,
@@ -70,6 +71,9 @@ const Form = ({ onFanLetterSubmit, artists }) => {
     setNickname("");
     setContent("");
     setSelectedArtist("all");
+
+    // 팬레터 등록 완료 알림
+    alert("등록 완료되었습니다.");
   };
 
   return (
@@ -92,7 +96,7 @@ const Form = ({ onFanLetterSubmit, artists }) => {
           value={selectedArtist}
           onChange={(e) => setSelectedArtist(e.target.value)}
         >
-          <Option value="all">전체</Option>
+          <Option value="all">멤버를 선택해주세요</Option>
           {artists.map((artist) => (
             <Option key={artist} value={artist}>
               {artist}

@@ -1,10 +1,9 @@
-// Home.js
 import React, { useState } from "react";
 import LetterList from "../components/LetterList";
 import Header from "../components/Header";
 import Form from "../components/Form";
 import styled from "styled-components";
-import fakeData from "../shared/fakeData.json";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("all");
@@ -15,15 +14,21 @@ export default function Home() {
     setFanLetters([...fanLetters, newFanLetter]);
   };
 
-  const artists = ["all", "유진", "가을", "레이", "원영", "리즈", "이서"];
+  const artists = ["전체", "유진", "가을", "레이", "원영", "리즈", "이서"];
 
   const allData = [...fakeData, ...fanLetters];
+
+  const navigate = useNavigate();
+
+  const handleLetterClick = (letterId) => {
+    navigate(`/detail/${letterId}`);
+  };
 
   return (
     <Container>
       <Header setActiveTab={setActiveTab} activeTab={activeTab} artists={artists} />
       <Form onFanLetterSubmit={handleFanLetterSubmit} artists={artists} />
-      <LetterList activeTab={activeTab} fanLetters={allData} />
+      <LetterList activeTab={activeTab} fanLetters={allData} onLetterClick={handleLetterClick} />
     </Container>
   );
 }
