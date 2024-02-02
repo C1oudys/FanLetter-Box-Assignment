@@ -9,7 +9,7 @@ const LetterContainer = styled.div`
   background-color: #b22222;
   border-radius: 3%;
   width: 450px;
-  height: 200px;
+  height: 230px;
 `;
 
 const AvatarImage = styled.img`
@@ -39,8 +39,9 @@ const CreatedAt = styled.p`
 
 const Content = styled.p`
   margin: 0; 
-  padding: 5px;
-  height: 30px;
+  padding: 10px;
+  width: 40 0px;
+  height: 45px;
   color: 	#fffaf0;
   background-color: #ff4500;
   line-height: 1.4;
