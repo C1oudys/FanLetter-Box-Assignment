@@ -16,7 +16,7 @@ const LetterList = ({ activeTab, fanLetters, onLetterClick }) => {
     <div>
       {fanLetters
         .filter((letter) => activeTab === "all" || letter.writedTo === activeTab)
-        .map((letter) => (
+        .map((letter) => (  
           <StyledLink key={letter.id} to={`/detail/${letter.id}`} onClick={() => onLetterClick(letter.id)}>
             <Letter letter={letter} />
           </StyledLink>
