@@ -1,4 +1,3 @@
-// Form.js
 import React, { useState } from "react";
 import styled from "styled-components";
 import fakeData from "../shared/fakeData.json";
@@ -96,8 +95,10 @@ const Form = ({ onFanLetterSubmit, artists }) => {
       writedTo: selectedArtist,
     };
 
+
     // 부모 컴포넌트로 팬 레터 전송
     onFanLetterSubmit(newFanLetter);
+
 
     // 입력값 초기화
     setNickname("");

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// 스타일된 컴포넌트 추가
 const LetterContainer = styled.div`
   display: flex;
   align-items: center;

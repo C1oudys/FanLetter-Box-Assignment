@@ -1,37 +1,10 @@
-import React, { useState } from "react";
+// Home.jsx
+import React, { useState, useEffect } from "react";
 import LetterList from "../components/LetterList";
 import Header from "../components/Header";
 import Form from "../components/Form";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState("all");
-  const [fakeData, setFakeData] = useState(require("../shared/fakeData.json"));
-  const [fanLetters, setFanLetters] = useState([]);
-
-  const handleFanLetterSubmit = (newFanLetter) => {
-    setFanLetters([...fanLetters, newFanLetter]);
-  };
-
-  const artists = ["전체", "유진", "가을", "레이", "원영", "리즈", "이서"];
-
-  const allData = [...fakeData, ...fanLetters];
-
-  const navigate = useNavigate();
-
-  const handleLetterClick = (letterId) => {
-    navigate(`/detail/${letterId}`);
-  };
-
-  return (
-    <Container>
-      <Header setActiveTab={setActiveTab} activeTab={activeTab} artists={artists} />
-      <Form onFanLetterSubmit={handleFanLetterSubmit} artists={artists} />
-      <LetterList activeTab={activeTab} fanLetters={allData} onLetterClick={handleLetterClick} />
-    </Container>
-  );
-}
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -39,3 +12,32 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export default function Home({ fanLetters, setFanLetters }) {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const handleFanLetterSubmit = (newFanLetter) => {
+    setFanLetters([...fanLetters, newFanLetter]);
+  };
+
+  useEffect(() => {
+    console.log('fanLetters after submit:', fanLetters);
+  }, [fanLetters]);
+
+  const artists = ["전체", "유진", "가을", "레이", "원영", "리즈", "이서"];
+
+  const navigate = useNavigate();
+
+  const handleLetterClick = (letterId) => {
+    const selected = fanLetters.find((letter) => letter.id === letterId);
+    navigate(`/detail/${letterId}`);
+  };
+
+  return (
+    <Container>
+      <Header setActiveTab={setActiveTab} activeTab={activeTab} artists={artists} />
+      <Form onFanLetterSubmit={handleFanLetterSubmit} artists={artists} />
+      <LetterList activeTab={activeTab} fanLetters={fanLetters} onLetterClick={handleLetterClick} />
+    </Container>
+  );
+}
