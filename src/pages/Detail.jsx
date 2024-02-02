@@ -1,4 +1,5 @@
-import React from "react";
+// Detail.jsx
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../assets/background.png";
@@ -32,8 +33,8 @@ const DetailContent = styled.div`
   padding: 10px;
   background-color: rgba(178, 34, 34, 0.7);
   border-radius: 3%;
-  width: 800px;
-  height: 500px;
+  width: 750px;
+  height: 550px;
 `;
 
 const Nickname = styled.p`
@@ -44,30 +45,41 @@ const Nickname = styled.p`
 `;
 
 const CreatedAt = styled.p`
-  color: #e6e6fa; 
-  margin-bottom: 5px; 
+  color: #e6e6fa;
+  margin-bottom: 5px;
   font-size: 20px;
   margin-bottom: 20px;
 `;
 
 const WritedTo = styled.p`
-  color: #e6e6fa; 
-  margin-bottom: 5px; 
+  color: #e6e6fa;
+  margin-bottom: 5px;
   font-size: 25px;
   font-weight: bolder;
   margin-bottom: 20px;
 `;
 
 const Content = styled.p`
-  margin: 5px; 
+  margin: 5px;
   padding: 10px;
   width: 650px;
-  height: 250px;
-  color: 	#fffaf0;
+  height: 300px;
+  color: #fffaf0;
   background-color: rgba(255, 69, 0, 0.4);
-  line-height: 1.4;
-  font-size: 19px;
+  line-height: 1.2;
+  font-size: 18px;
   margin-bottom: 40px;
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: #fffaf0;
+    font-size: 18px;
+    line-height: 1.2;
+    resize: none;
+  }
 `;
 
 const BackButton = styled(Link)`
@@ -76,7 +88,8 @@ const BackButton = styled(Link)`
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
@@ -91,12 +104,47 @@ const DeleteButton = styled.button`
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  margin-top: 20px;
+  margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #c82333;
+  }
+`;
+
+const EditBtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const EditButton = styled.button`
+  background-color: #4caf50;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+const SaveButton = styled.button`
+  background-color: #008CBA;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #007a8a;
   }
 `;
 
@@ -111,22 +159,44 @@ const Detail = ({ fanLetters, setFanLetters }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState("");
+  
+
   // 선택된 팬레터 가져오기
   const selectedLetter = fanLetters.find((letter) => letter.id === id);
-
-  const handleDeleteClick = () => {
-    const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
-    if (confirmDelete) {
-      // 삭제 확인 시 팬레터 삭제 및 홈 화면으로 이동
-      const updatedFanLetters = fanLetters.filter((letter) => letter.id !== id);
-      setFanLetters(updatedFanLetters);
-      navigate("/");
-    }
-  };
 
   if (!selectedLetter) {
     return <div>팬레터를 찾을 수 없습니다.</div>;
   }
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setEditedContent(selectedLetter.content);
+  };
+
+  const handleSaveClick = () => {
+    if (editedContent === selectedLetter.content) {
+      alert("아무런 수정사항이 없습니다.");
+    } else {
+      const updatedLetters = fanLetters.map((letter) =>
+        letter.id === id ? { ...letter, content: editedContent } : letter
+      );
+      setFanLetters(updatedLetters);
+      setIsEditing(false);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    // 삭제 확인 처리 (삭제 확인 모달 등을 사용할 수 있음)
+    const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
+    if (isConfirmed) {
+      // 삭제 후 홈 화면으로 이동
+      const updatedLetters = fanLetters.filter((letter) => letter.id !== id);
+      setFanLetters(updatedLetters);
+      navigate("/");
+    }
+  };
 
   return (
     <Container>
@@ -140,14 +210,33 @@ const Detail = ({ fanLetters, setFanLetters }) => {
             <CreatedAt>
               <strong>작성 시간:</strong> {selectedLetter.createdAt}
             </CreatedAt>
-            <Content>
-              <strong>내용:</strong> {selectedLetter.content}
-            </Content>
+            {isEditing ? (
+              <Content>
+                <textarea
+                  value={editedContent}
+                  onChange={(e) => setEditedContent(e.target.value)}
+                />
+              </Content>
+            ) : (
+              <Content>
+               {selectedLetter.content}
+              </Content>
+            )}
             <Nickname>
               <strong>From.</strong> {selectedLetter.nickname}
             </Nickname>
           </DetailContent>
-          <DeleteButton onClick={handleDeleteClick}>삭제하기</DeleteButton>
+          {isEditing ? (
+            <EditBtnContainer>
+              <SaveButton onClick={handleSaveClick}>수정 완료</SaveButton>
+              <BackButton to="/">취소</BackButton>
+            </EditBtnContainer>
+          ) : (
+            <EditBtnContainer>
+              <EditButton onClick={handleEditClick}>수정</EditButton>
+              <DeleteButton onClick={handleDeleteClick}>삭제</DeleteButton>
+            </EditBtnContainer>
+          )}
           <BackButton to="/">홈으로 돌아가기</BackButton>
         </DetailContainer>
       </Background>
