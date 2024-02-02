@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useState, useEffect } from "react";
 import LetterList from "../components/LetterList";
 import Header from "../components/Header";

@@ -1,4 +1,3 @@
-// Detail.jsx
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -44,7 +43,6 @@ const Detail = ({ fanLetters }) => {
         <p>
           <strong>작성 대상:</strong> {selectedLetter.writedTo}
         </p>
-        {/* 기타 팬레터 관련 정보들을 추가할 수 있습니다. */}
       </DetailContent>
     </DetailContainer>
   );
