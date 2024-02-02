@@ -38,7 +38,8 @@ const ArtistInfoContainer = styled.div`
   bottom: 5%;
   font-size: 25px;
   font-weight: bolder;
-  text-shadow: 2px 2px 8px red;
+  text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00, 0 0 42px #f00,
+  0 0 82px #f00, 0 0 92px #f00, 0 0 102px #f00, 0 0 151px #f00;
   color: white;
   width: 100%;
   padding: 5px;
