@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import defaultAvatar from "../assets/defaultavatar.png";
-import { useFanLetters } from "../context/FanLettersContext";
+import { useDispatch } from "react-redux";
+import { addFanLetter } from "../redux/modules/fanLetters";
 import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.div`
@@ -71,7 +72,7 @@ const SubmitButton = styled.button`
 const artists = ["all", "유진", "가을", "레이", "원영", "리즈", "이서"];
 
 const Form = () => {
-  const { fanLetters, setFanLetters } = useFanLetters(); // useFanLetters 훅을 사용하여 fanLetters 상태 가져오기
+  const dispatch = useDispatch();
   const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
   const [selectedArtist, setSelectedArtist] = useState("");
@@ -99,8 +100,7 @@ const Form = () => {
       writedTo: selectedArtist,
     };
 
-    // 부모 컴포넌트로 팬 레터 전송
-    setFanLetters([...fanLetters, newFanLetter]);
+    dispatch(addFanLetter(newFanLetter));
 
     // 입력값 초기화
     setNickname("");

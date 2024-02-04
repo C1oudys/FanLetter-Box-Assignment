@@ -3,7 +3,8 @@ import LetterList from "../components/LetterList";
 import Header from "../components/Header";
 import Form from "../components/Form";
 import styled from "styled-components";
-import { useFanLetters } from "../context/FanLettersContext"; 
+import { useSelector, useDispatch } from "react-redux";
+import { addFanLetter } from "../redux/modules/fanLetters";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,18 +25,17 @@ const NoLettersMessage = styled.div`
 `;
 
 export default function Home() {
-  const { fanLetters, setFanLetters } = useFanLetters(); // useFanLetters 훅을 사용하여 fanLetters 상태 가져오기
-
+  const fanLetters = useSelector((state) => state.fanLetters.fanLetters);
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("all");
   const navigate = useNavigate();
 
-  // 해당 멤버에게 남겨진 팬레터가 있는지 확인하는 함수
   const hasLettersForArtist = (artist) => {
     return fanLetters.some((letter) => letter.writedTo === artist);
   };
 
   const handleFanLetterSubmit = (newFanLetter) => {
-    setFanLetters([...fanLetters, newFanLetter]);
+    dispatch(addFanLetter(newFanLetter));
   };
 
   useEffect(() => {
@@ -53,7 +53,6 @@ export default function Home() {
     <Container>
       <Header setActiveTab={setActiveTab} activeTab={activeTab} artists={artists} />
       <Form onFanLetterSubmit={handleFanLetterSubmit} artists={artists} />
-      {/* 해당 멤버에게 남겨진 팬레터가 없다면 메시지를 표시 */}
       {activeTab !== "all" && !hasLettersForArtist(activeTab) && (
         <NoLettersMessage>{`${activeTab}에게 남겨진 팬레터가 없습니다. 첫 팬레터의 주인공이 되주세요!`}</NoLettersMessage>
       )}
