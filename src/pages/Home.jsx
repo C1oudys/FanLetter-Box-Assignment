@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LetterList from "../components/LetterList";
 import Header from "../components/Header";
 import Form from "../components/Form";
 import styled from "styled-components";
+import { useFanLetters } from "../context/FanLettersContext"; 
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -14,14 +16,16 @@ const Container = styled.div`
 
 const NoLettersMessage = styled.div`
   margin-top: 20px;
-  margin-bottom:30px;
+  margin-bottom: 30px;
   text-shadow: 0 0 7px #ff66b2, 0 0 10px #ff66b2, 0 0 21px #ff66b2, 0 0 42px #ff66b2,
     0 0 82px #ff66b2, 0 0 92px #ff66b2, 0 0 102px #ff66b2, 0 0 151px #ff66b2;
   color: #fff;
   font-size: 20px;
 `;
 
-export default function Home({ fanLetters, setFanLetters }) {
+export default function Home() {
+  const { fanLetters, setFanLetters } = useFanLetters(); // useFanLetters 훅을 사용하여 fanLetters 상태 가져오기
+
   const [activeTab, setActiveTab] = useState("all");
   const navigate = useNavigate();
 
@@ -57,4 +61,3 @@ export default function Home({ fanLetters, setFanLetters }) {
     </Container>
   );
 }
-

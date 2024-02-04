@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import fakeData from "../shared/fakeData.json";
 import defaultAvatar from "../assets/defaultavatar.png";
+import { useFanLetters } from "../context/FanLettersContext";
 import { v4 as uuidv4 } from 'uuid';
 
 const FormContainer = styled.div`
@@ -60,23 +60,27 @@ const SubmitButton = styled.button`
   color: white;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease; /* 호버 효과 부드럽게 만들기 */
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color:#800000; /* 호버 시 배경색 변경 */
   } 
 `;
 
-const Form = ({ onFanLetterSubmit, artists }) => {
+// 아티스트 목록
+const artists = ["all", "유진", "가을", "레이", "원영", "리즈", "이서"];
+
+const Form = () => {
+  const { fanLetters, setFanLetters } = useFanLetters(); // useFanLetters 훅을 사용하여 fanLetters 상태 가져오기
   const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
-  const [selectedArtist, setSelectedArtist] = useState("all");
+  const [selectedArtist, setSelectedArtist] = useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // 입력 유효성 검사
-    if (!nickname || !content || selectedArtist === "all") {
+    if (!nickname || !content || selectedArtist === "") {
       alert("닉네임, 내용, 멤버를 선택하세요.");
       return;
     }
@@ -95,15 +99,13 @@ const Form = ({ onFanLetterSubmit, artists }) => {
       writedTo: selectedArtist,
     };
 
-
     // 부모 컴포넌트로 팬 레터 전송
-    onFanLetterSubmit(newFanLetter);
-
+    setFanLetters([...fanLetters, newFanLetter]);
 
     // 입력값 초기화
     setNickname("");
     setContent("");
-    setSelectedArtist("all");
+    setSelectedArtist("");
 
     // 팬레터 등록 완료 알림
     alert("등록 완료되었습니다.");
@@ -129,7 +131,7 @@ const Form = ({ onFanLetterSubmit, artists }) => {
           value={selectedArtist}
           onChange={(e) => setSelectedArtist(e.target.value)}
         >
-          <Option value="all">멤버를 선택해주세요</Option>
+          <Option value="">멤버를 선택해주세요</Option>
           {artists.map((artist) => (
             <Option key={artist} value={artist}>
               {artist}

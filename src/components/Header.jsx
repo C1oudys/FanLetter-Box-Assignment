@@ -8,6 +8,7 @@ import LizImage from "../assets/Liz.png";
 import LeeseoImage from "../assets/Leeseo.png";
 import AllImage from "../assets/IveLogo.jpeg";
 
+
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -84,7 +85,7 @@ const Header = ({ setActiveTab, activeTab }) => {
         >
           <img
             src={artistImages[artist]}
-            alt={`${artist} 이미지`}
+            alt={`${artist}`}
             style={{ width: "206px", height: "350px", objectFit: "cover" }}
           />
           <ArtistInfoContainer>

@@ -1,8 +1,8 @@
-// Detail.jsx
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../assets/background.png";
+import { useFanLetters } from "../context/FanLettersContext";
 
 const Container = styled.div`
   width: 100%;
@@ -155,9 +155,10 @@ const Avatar = styled.img`
   margin: 10px;
 `;
 
-const Detail = ({ fanLetters, setFanLetters }) => {
+const Detail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { fanLetters, setFanLetters } = useFanLetters();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState("");
@@ -188,10 +189,8 @@ const Detail = ({ fanLetters, setFanLetters }) => {
   };
 
   const handleDeleteClick = () => {
-    // 삭제 확인 처리 (삭제 확인 모달 등을 사용할 수 있음)
     const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
     if (isConfirmed) {
-      // 삭제 후 홈 화면으로 이동
       const updatedLetters = fanLetters.filter((letter) => letter.id !== id);
       setFanLetters(updatedLetters);
       navigate("/");
