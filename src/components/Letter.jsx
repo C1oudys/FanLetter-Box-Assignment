@@ -10,6 +10,11 @@ const LetterContainer = styled.div`
   border-radius: 3%;
   width: 450px;
   height: 230px;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(239, 105, 203, 0.8); /* 호버시 테두리에 빛이 나오도록 설정 */
+  }
 `;
 
 const AvatarImage = styled.img`

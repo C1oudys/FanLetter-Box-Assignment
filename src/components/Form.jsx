@@ -96,7 +96,7 @@ const Form = () => {
       avatar: defaultAvatar, // 기본 아바타 이미지 사용
       nickname: trimmedNickname,
       content: trimmedContent,
-      createdAt: new Date().toLocaleString(), // 현재 날짜 및 시간
+      createdAt: new Date().toLocaleString("ko"), // 현재 날짜 및 시간
       writedTo: selectedArtist,
     };
 
