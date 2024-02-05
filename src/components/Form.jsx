@@ -27,8 +27,13 @@ const Input = styled.input`
   margin: 10px;
   width: 200px;
   height: 40px;
-  color: white;
+  color: #fffaf0;;
   font-weight: bold;
+  &::placeholder {
+    color: #fffaf0;
+    font-size: 14px;
+    font-weight: bold; 
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -36,8 +41,13 @@ const TextArea = styled.textarea`
   margin: 10px;
   width: 450px;
   height: 300px;
-  color: white;
+  color: #fffaf0;;
   font-weight: bold;
+  &::placeholder {
+    color: #fffaf0;;
+    font-size: 15px;
+    font-weight: bold; 
+  }
 `;
 
 const Select = styled.select`
@@ -46,7 +56,7 @@ const Select = styled.select`
   padding: 5px;
   width: 150px;
   height: 40px;
-  color: white;
+  color: #fffaf0;;
   font-weight: bold;
 `;
 
@@ -58,7 +68,7 @@ const SubmitButton = styled.button`
   width: 80px;
   height: 40px;
   margin: 10px;
-  color: white;
+  color: #fffaf0;;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
@@ -67,6 +77,11 @@ const SubmitButton = styled.button`
     background-color:#800000; /* 호버 시 배경색 변경 */
   } 
 `;
+
+const RemainingCharacters = styled.span`
+  color: #fffaf0;;
+`;
+
 
 // 아티스트 목록
 const artists = ["all", "유진", "가을", "레이", "원영", "리즈", "이서"];
@@ -96,7 +111,7 @@ const Form = () => {
       avatar: defaultAvatar, // 기본 아바타 이미지 사용
       nickname: trimmedNickname,
       content: trimmedContent,
-      createdAt: new Date().toLocaleString(), // 현재 날짜 및 시간
+      createdAt: new Date().toLocaleString("ko"), // 현재 날짜 및 시간
       writedTo: selectedArtist,
     };
 
@@ -111,6 +126,11 @@ const Form = () => {
     alert("등록 완료되었습니다.");
   };
 
+  // 남은 글자 수 계산 함수
+  const calculateRemainingCharacters = (currentLength, maxLength) => {
+    return maxLength - currentLength
+  };
+
   return (
     <FormContainer>
       <AddForm onSubmit={handleFormSubmit}>
@@ -121,12 +141,18 @@ const Form = () => {
           onChange={(e) => setNickname(e.target.value)}
           maxLength={20}
         />
+         <RemainingCharacters>
+          남은 글자 수: {calculateRemainingCharacters(nickname.length, 20)}
+        </RemainingCharacters>
         <TextArea
           placeholder="팬레터 내용"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           maxLength={200}
         />
+         <RemainingCharacters>
+          남은 글자 수: {calculateRemainingCharacters(content.length, 200)}
+        </RemainingCharacters>
         <Select
           value={selectedArtist}
           onChange={(e) => setSelectedArtist(e.target.value)}
