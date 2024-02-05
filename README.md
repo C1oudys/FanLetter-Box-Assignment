@@ -45,8 +45,8 @@ npm yarn start
 <li>상세 페이지에서 수정과 삭제를 할 수 있습니다.</li>  
 <br>
 <li>수정과 삭제시 홈 페이지도 수정과 삭제가 진행 됩니다.</li>
-* * *
 
+* * *
 ## <div align="center">Directory 구조</div>
 * * *
 
