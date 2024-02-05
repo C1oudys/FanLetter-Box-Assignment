@@ -15,15 +15,15 @@
 git clone https://github.com/your-username/fanletterbox.git](https://github.com/C1oudys/FanLetter-Box-Assignment.git
 
   
-#### 프로젝트 폴더로 이동합니다.  
+#### 2. 프로젝트 폴더로 이동합니다.  
 
 cd fanletterbox
 
-#### 필요한 패키지를 설치합니다.
+#### 3. 필요한 패키지를 설치합니다.
 
 npm install yarn
 
-#### 애플리케이션을 실행합니다.
+#### 4. 애플리케이션을 실행합니다.
 
 npm yarn start
 * * *
