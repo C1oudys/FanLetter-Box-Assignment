@@ -25,7 +25,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://c1oudys.github.io/FanLetter-Box-Assignment/",
+  "homepage": "https://c1oudys.github.io/FanLetter-Box-Assignment",
   "eslintConfig": {
     "extends": [
       "react-app",

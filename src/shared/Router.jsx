@@ -8,7 +8,7 @@ import store from '../redux/config/store';
 export default function Router() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename='FanLetter-Box-Assignment"'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
