@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../assets/background.png";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteFanLetter, updateFanLetter, editFanLetter } from "../redux/modules/fanLetters";
+import { deleteFanLetter, editFanLetter } from "../redux/modules/fanLetters";
 
 const Container = styled.div`
   width: 100%;
@@ -180,23 +180,21 @@ const Detail = () => {
     if (editedContent === selectedLetter.content) {
       alert("아무런 수정사항이 없습니다.");
     } else {
-      const updatedLetters = fanLetters.map((letter) =>
-        letter.id === id ? { ...letter, content: editedContent } : letter
-      );
-      dispatch(editFanLetter(updatedLetters));  
+      const updatedLetter = { ...selectedLetter, content: editedContent };
+      dispatch(editFanLetter(updatedLetter.id, editedContent));
       setIsEditing(false);
+      setEditedContent("");
     }
   };
-
+  
   const handleDeleteClick = () => {
     const isConfirmed = window.confirm("정말로 삭제하시겠습니까?");
     if (isConfirmed) {
-      const updatedLetters = fanLetters.filter((letter) => letter.id !== id);
-      dispatch(deleteFanLetter(updatedLetters));
+      dispatch(deleteFanLetter(id));
       navigate("/");
     }
   };
-
+  
   return (
     <Container>
       <Background>
