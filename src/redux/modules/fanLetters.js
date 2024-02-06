@@ -87,7 +87,7 @@ const fanLettersReducer = (state = initialState, action) => {
     case ADD_FAN_LETTER:
       return {
         ...state,
-        fanLetters: [...state.fanLetters, action.payload],
+        fanLetters: [action.payload, ...state.fanLetters],
       };
     case EDIT_FAN_LETTER:
       return {
